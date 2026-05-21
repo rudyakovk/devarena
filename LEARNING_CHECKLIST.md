@@ -29,11 +29,11 @@ Rule:
 
 ### Basic Go syntax
 
-- [x] Variables
-- [x] Basic data types
-- [x] Functions
-- [x] Conditions
-- [x] Loops
+- [ ] Variables
+- [ ] Basic data types
+- [ ] Functions
+- [ ] Conditions
+- [ ] Loops
 - [ ] Arrays
 - [ ] Slices
 - [ ] Maps
@@ -43,6 +43,25 @@ Rule:
 - [ ] Interfaces
 - [ ] Packages
 - [ ] Modules
+
+### Error handling
+
+- [ ] Basic errors
+- [ ] Error wrapping
+- [ ] Sentinel errors
+- [ ] Custom errors
+
+### Concurrency
+
+- [ ] Goroutines
+- [ ] Channels
+- [ ] Buffered channels
+- [ ] Select
+- [ ] sync.WaitGroup
+- [ ] sync.Mutex
+- [ ] Race conditions
+- [ ] context.Context
+- [ ] Worker pool
 
 ---
 
