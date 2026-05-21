@@ -1,0 +1,30 @@
+# Binaries
+/bin/
+/dist/
+*.exe
+*.out
+*.test
+
+# Go workspace
+go.work
+
+# Environment files
+.env
+.env.local
+
+# Logs
+*.log
+
+# IDE
+.idea/
+.vscode/
+
+# OS
+.DS_Store
+
+# Coverage
+coverage.out
+coverage.html
+
+# Temporary files
+/tmp/
