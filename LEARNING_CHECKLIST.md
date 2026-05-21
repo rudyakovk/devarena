@@ -33,7 +33,7 @@ Rule:
 - [x] Basic data types
 - [x] Functions
 - [x] Conditions
-- [ ] Loops
+- [x] Loops
 - [ ] Arrays
 - [ ] Slices
 - [ ] Maps

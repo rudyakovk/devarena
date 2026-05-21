@@ -18,6 +18,9 @@ func main() {
 	heroAlive := true
 	heroCriticalChance := 0.15
 
+	enemyName := "Goblin"
+	enemyHP := 60
+
 	heroTotalDamage := calculateDamage(heroBaseDamage, heroBonusDamage)
 
 	fmt.Println("Hero name:", heroName)
@@ -35,4 +38,24 @@ func main() {
 	} else {
 		fmt.Println(heroName, "is defeated and cannot fight")
 	}
+
+	fmt.Println("Enemy name:", enemyName)
+	fmt.Println("Enemy HP:", enemyHP)
+
+	fmt.Println("Battle started")
+
+	for round := 1; enemyHP > 0; round++ {
+		enemyHP -= heroTotalDamage
+
+		if enemyHP < 0 {
+			enemyHP = 0
+		}
+
+		fmt.Println("Round:", round)
+		fmt.Println(heroName, "hits", enemyName, "for", heroTotalDamage, "damage")
+		fmt.Println(enemyName, "HP:", enemyHP)
+	}
+
+	fmt.Println("Battle finished")
+	fmt.Println(enemyName, "is defeated")
 }
