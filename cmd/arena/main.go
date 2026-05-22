@@ -14,6 +14,31 @@ const (
 	defaultEnemyHP   = 60
 )
 
+type Hero struct {
+	Name           string
+	Class          string
+	Level          int
+	HP             int
+	BaseDamage     int
+	BonusDamage    int
+	Alive          bool
+	CriticalChance float64
+	Attacks        [3]string
+	Inventory      []string
+	Stats          map[string]int
+}
+
+type Enemy struct {
+	Name string
+	HP   int
+}
+
+type Battle struct {
+	Hero  Hero
+	Enemy Enemy
+	Round int
+}
+
 func calculateDamage(baseDamage int, bonusDamage int) int {
 	return baseDamage + bonusDamage
 }
@@ -21,68 +46,79 @@ func calculateDamage(baseDamage int, bonusDamage int) int {
 func main() {
 	fmt.Println("Welcome to DevArena")
 
-	heroName := "Ragnar"
-	heroClass := defaultHeroClass
-	heroLevel := defaultHeroLevel
-	heroHP := defaultHeroHP
-	heroBaseDamage := defaultHeroBaseDamage
-	heroBonusDamage := defaultHeroBonusDamage
-	heroAlive := true
-	heroCriticalChance := defaultHeroCriticalChance
-	heroAttacks := [3]string{"Slash", "Pierce", "Heavy Strike"}
-	heroInventory := []string{"Small Potion", "Wooden Shield"}
-	heroStats := map[string]int{
-		"strength": 10,
-		"agility":  7,
-		"stamina":  12,
+	hero := Hero{
+		Name:           "Ragnar",
+		Class:          defaultHeroClass,
+		Level:          defaultHeroLevel,
+		HP:             defaultHeroHP,
+		BaseDamage:     defaultHeroBaseDamage,
+		BonusDamage:    defaultHeroBonusDamage,
+		Alive:          true,
+		CriticalChance: defaultHeroCriticalChance,
+		Attacks:        [3]string{"Slash", "Pierce", "Heavy Strike"},
+		Inventory:      []string{"Small Potion", "Wooden Shield"},
+		Stats: map[string]int{
+			"strength": 10,
+			"agility":  7,
+			"stamina":  12,
+		},
 	}
-	heroTotalDamage := calculateDamage(heroBaseDamage, heroBonusDamage)
 
-	enemyName := defaultEnemyName
-	enemyHP := defaultEnemyHP
+	enemy := Enemy{
+		Name: defaultEnemyName,
+		HP:   defaultEnemyHP,
+	}
 
-	inventoryBeforeBattle := make([]string, len(heroInventory))
-	copy(inventoryBeforeBattle, heroInventory)
+	battle := Battle{
+		Hero:  hero,
+		Enemy: enemy,
+		Round: 0,
+	}
 
-	fmt.Println("Hero name:", heroName)
-	fmt.Println("Hero class:", heroClass)
-	fmt.Println("Hero level:", heroLevel)
-	fmt.Println("Hero HP:", heroHP)
-	fmt.Println("Hero base damage:", heroBaseDamage)
-	fmt.Println("Hero bonus damage:", heroBonusDamage)
+	heroTotalDamage := calculateDamage(hero.BaseDamage, hero.BonusDamage)
+
+	inventoryBeforeBattle := make([]string, len(hero.Inventory))
+	copy(inventoryBeforeBattle, hero.Inventory)
+
+	fmt.Println("Hero name:", hero.Name)
+	fmt.Println("Hero class:", hero.Class)
+	fmt.Println("Hero level:", hero.Level)
+	fmt.Println("Hero HP:", hero.HP)
+	fmt.Println("Hero base damage:", hero.BaseDamage)
+	fmt.Println("Hero bonus damage:", hero.BonusDamage)
 	fmt.Println("Hero total damage:", heroTotalDamage)
-	fmt.Println("Hero alive:", heroAlive)
-	fmt.Println("Hero critical chance:", heroCriticalChance)
+	fmt.Println("Hero alive:", hero.Alive)
+	fmt.Println("Hero critical chance:", hero.CriticalChance)
 
 	fmt.Println("Hero stats:")
-	for statName, statValue := range heroStats {
+	for statName, statValue := range hero.Stats {
 		fmt.Println(statName+":", statValue)
 	}
 
-	intellect, exists := heroStats["intellect"]
+	intellect, exists := hero.Stats["intellect"]
 	if exists {
 		fmt.Println("Intellect:", intellect)
 	} else {
 		fmt.Println("Intellect stat is not defined")
 	}
 
-	heroStats["strength"] = heroStats["strength"] + 2
-	heroStats["intellect"] = 3
+	hero.Stats["strength"] = hero.Stats["strength"] + 2
+	hero.Stats["intellect"] = 3
 
 	fmt.Println("Hero stats after training:")
-	for statName, statValue := range heroStats {
+	for statName, statValue := range hero.Stats {
 		fmt.Println(statName+":", statValue)
 	}
 
-	delete(heroStats, "intellect")
+	delete(hero.Stats, "intellect")
 
 	fmt.Println("Hero stats after removing temporary intellect bonus:")
-	for statName, statValue := range heroStats {
+	for statName, statValue := range hero.Stats {
 		fmt.Println(statName+":", statValue)
 	}
 
 	fmt.Println("Hero attacks:")
-	for index, attack := range heroAttacks {
+	for index, attack := range hero.Attacks {
 		fmt.Println("Attack", index+1, ":", attack)
 	}
 
@@ -91,13 +127,13 @@ func main() {
 		fmt.Println("Item", index+1, ":", item)
 	}
 
-	fmt.Println("Inventory length before reward:", len(heroInventory))
-	fmt.Println("Inventory capacity before reward:", cap(heroInventory))
+	fmt.Println("Inventory length before reward:", len(hero.Inventory))
+	fmt.Println("Inventory capacity before reward:", cap(hero.Inventory))
 
-	heroInventory = append(heroInventory, "Rusty Sword")
+	hero.Inventory = append(hero.Inventory, "Rusty Sword")
 
 	fmt.Println("Hero inventory after reward:")
-	for index, item := range heroInventory {
+	for index, item := range hero.Inventory {
 		fmt.Println("Item", index+1, ":", item)
 	}
 
@@ -106,37 +142,39 @@ func main() {
 		fmt.Println("Item", index+1, ":", item)
 	}
 
-	fmt.Println("Inventory length after reward:", len(heroInventory))
-	fmt.Println("Inventory capacity after reward:", cap(heroInventory))
+	fmt.Println("Inventory length after reward:", len(hero.Inventory))
+	fmt.Println("Inventory capacity after reward:", cap(hero.Inventory))
 
-	if heroHP > 0 {
-		fmt.Println(heroName, "is ready to fight")
+	if hero.HP > 0 {
+		fmt.Println(hero.Name, "is ready to fight")
 	} else {
-		fmt.Println(heroName, "is defeated and cannot fight")
+		fmt.Println(hero.Name, "is defeated and cannot fight")
 	}
 
-	fmt.Println("Enemy name:", enemyName)
-	fmt.Println("Enemy HP:", enemyHP)
+	fmt.Println("Enemy name:", enemy.Name)
+	fmt.Println("Enemy HP:", enemy.HP)
 
 	fmt.Println("Battle started")
 
-	for round := 1; enemyHP > 0; round++ {
-		attackIndex := (round - 1) % len(heroAttacks)
-		selectedAttack := heroAttacks[attackIndex]
+	for battle.Enemy.HP > 0 {
+		battle.Round++
 
-		enemyHP -= heroTotalDamage
+		attackIndex := (battle.Round - 1) % len(battle.Hero.Attacks)
+		selectedAttack := battle.Hero.Attacks[attackIndex]
 
-		if enemyHP < 0 {
-			enemyHP = 0
+		battle.Enemy.HP -= heroTotalDamage
+
+		if battle.Enemy.HP < 0 {
+			battle.Enemy.HP = 0
 		}
 
-		fmt.Println("Round:", round)
-		fmt.Println(heroName, "uses", selectedAttack)
-		fmt.Println(heroName, "hits", enemyName, "for", heroTotalDamage, "damage")
-		fmt.Println(enemyName, "HP:", enemyHP)
+		fmt.Println("Round:", battle.Round)
+		fmt.Println(battle.Hero.Name, "uses", selectedAttack)
+		fmt.Println(battle.Hero.Name, "hits", battle.Enemy.Name, "for", heroTotalDamage, "damage")
+		fmt.Println(battle.Enemy.Name, "HP:", battle.Enemy.HP)
 	}
 
 	fmt.Println("Battle finished")
-	fmt.Println(enemyName, "is defeated")
-	fmt.Println(heroName, "received item:", "Rusty Sword")
+	fmt.Println(battle.Enemy.Name, "is defeated")
+	fmt.Println(battle.Hero.Name, "received item:", "Rusty Sword")
 }

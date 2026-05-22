@@ -58,7 +58,7 @@ Beginner
 - [x] Arrays
 - [x] Slices
 - [x] Maps
-- [ ] Structs
+- [x] Structs
 - [ ] Methods
 - [ ] Pointers
 - [ ] Interfaces
@@ -115,7 +115,7 @@ Beginner
 
 ## Structs and Methods
 
-- [ ] Structs
+- [x] Structs
 - [ ] Embedded structs
 - [ ] Methods
 - [ ] Value receiver
