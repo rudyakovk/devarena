@@ -59,7 +59,7 @@ Beginner
 - [x] Slices
 - [x] Maps
 - [x] Structs
-- [ ] Methods
+- [x] Methods
 - [ ] Pointers
 - [ ] Interfaces
 - [ ] Packages
@@ -117,9 +117,9 @@ Beginner
 
 - [x] Structs
 - [ ] Embedded structs
-- [ ] Methods
-- [ ] Value receiver
-- [ ] Pointer receiver
+- [x] Methods
+- [x] Value receiver
+- [x] Pointer receiver
 - [ ] Method sets
 
 ## Pointers
