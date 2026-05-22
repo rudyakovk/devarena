@@ -60,7 +60,7 @@ Beginner
 - [x] Maps
 - [x] Structs
 - [x] Methods
-- [ ] Pointers
+- [x] Pointers
 - [ ] Interfaces
 - [ ] Packages
 - [ ] Modules
@@ -124,12 +124,12 @@ Beginner
 
 ## Pointers
 
-- [ ] Basic pointers
-- [ ] Address operator
-- [ ] Dereferencing
+- [x] Basic pointers
+- [x] Address operator
+- [x] Dereferencing
 - [ ] nil
-- [ ] Pointer receiver
-- [ ] Mutating state through pointer
+- [x] Pointer receiver
+- [x] Mutating state through pointer
 
 ## Interfaces
 

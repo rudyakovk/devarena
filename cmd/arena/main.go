@@ -34,8 +34,8 @@ type Enemy struct {
 }
 
 type Battle struct {
-	Hero  Hero
-	Enemy Enemy
+	Hero  *Hero
+	Enemy *Enemy
 	Round int
 }
 
@@ -80,6 +80,23 @@ func (h *Hero) AddItem(item string) {
 	h.Inventory = append(h.Inventory, item)
 }
 
+func (h *Hero) TakeDamage(damage int) {
+	h.HP -= damage
+
+	if h.HP <= 0 {
+		h.HP = 0
+		h.Alive = false
+	}
+}
+
+func (e *Enemy) TakeDamage(damage int) {
+	e.HP -= damage
+
+	if e.HP < 0 {
+		e.HP = 0
+	}
+}
+
 func (b *Battle) Start() {
 	fmt.Println("Battle started")
 
@@ -89,11 +106,7 @@ func (b *Battle) Start() {
 		attackIndex := (b.Round - 1) % len(b.Hero.Attacks)
 		selectedAttack := b.Hero.Attacks[attackIndex]
 
-		b.Enemy.HP -= b.Hero.TotalDamage()
-
-		if b.Enemy.HP < 0 {
-			b.Enemy.HP = 0
-		}
+		b.Enemy.TakeDamage(b.Hero.TotalDamage())
 
 		fmt.Println("Round:", b.Round)
 		fmt.Println(b.Hero.Name, "uses", selectedAttack)
@@ -103,6 +116,22 @@ func (b *Battle) Start() {
 
 	fmt.Println("Battle finished")
 	fmt.Println(b.Enemy.Name, "is defeated")
+}
+
+func damageHeroCopy(hero Hero, damage int) {
+	hero.HP -= damage
+	fmt.Println("Inside damageHeroCopy HP:", hero.HP)
+}
+
+func damageHeroOriginal(hero *Hero, damage int) {
+	hero.HP -= damage
+
+	if hero.HP <= 0 {
+		hero.HP = 0
+		hero.Alive = false
+	}
+
+	fmt.Println("Inside damageHeroOriginal HP:", hero.HP)
 }
 
 func main() {
@@ -132,8 +161,8 @@ func main() {
 	}
 
 	battle := Battle{
-		Hero:  hero,
-		Enemy: enemy,
+		Hero:  &hero,
+		Enemy: &enemy,
 		Round: 0,
 	}
 
@@ -189,10 +218,21 @@ func main() {
 		fmt.Println(hero.Name, "is defeated and cannot fight")
 	}
 
+	fmt.Println("Pointer demo:")
+	fmt.Println("Hero HP before damageHeroCopy:", hero.HP)
+	damageHeroCopy(hero, 10)
+	fmt.Println("Hero HP after damageHeroCopy:", hero.HP)
+
+	fmt.Println("Hero HP before damageHeroOriginal:", hero.HP)
+	damageHeroOriginal(&hero, 10)
+	fmt.Println("Hero HP after damageHeroOriginal:", hero.HP)
+
 	fmt.Println("Enemy name:", enemy.Name)
 	fmt.Println("Enemy HP:", enemy.HP)
 
 	battle.Start()
 
 	fmt.Println(hero.Name, "received item:", "Rusty Sword")
+	fmt.Println("Final hero HP:", hero.HP)
+	fmt.Println("Final enemy HP:", enemy.HP)
 }
