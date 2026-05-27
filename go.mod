@@ -1,3 +1,3 @@
-module github.com/rudyakovk/devarena.git
+module github.com/rudyakovk/devarena
 
 go 1.26.1

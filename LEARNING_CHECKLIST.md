@@ -62,7 +62,7 @@ Beginner
 - [x] Methods
 - [x] Pointers
 - [x] Interfaces
-- [ ] Packages
+- [x] Packages
 - [ ] Modules
 
 ## Go Types
@@ -142,10 +142,10 @@ Beginner
 
 ## Packages and Modules
 
-- [ ] Packages
-- [ ] Imports
-- [ ] Exported names
-- [ ] Unexported names
+- [x] Packages
+- [x] Imports
+- [x] Exported names
+- [x] Unexported names
 - [ ] Go modules
 - [ ] go.mod
 - [ ] go.sum
