@@ -41,8 +41,31 @@ func printWeaponInfo(weapon hero.Weapon) {
 	fmt.Println("Weapon damage bonus:", weapon.DamageBonus())
 }
 
+func printZeroValues() {
+	var defaultName string
+	var defaultLevel int
+	var defaultCriticalChance float64
+	var defaultAlive bool
+	var defaultHeroPointer *hero.Hero
+	var defaultInventory []string
+	var defaultStats map[string]int
+	var defaultHero hero.Hero
+
+	fmt.Println("Zero values demo:")
+	fmt.Println("Default string:", defaultName)
+	fmt.Println("Default int:", defaultLevel)
+	fmt.Println("Default float64:", defaultCriticalChance)
+	fmt.Println("Default bool:", defaultAlive)
+	fmt.Println("Default hero pointer:", defaultHeroPointer)
+	fmt.Println("Default inventory slice:", defaultInventory)
+	fmt.Println("Default stats map:", defaultStats)
+	fmt.Println("Default hero:", defaultHero)
+}
+
 func main() {
 	fmt.Println("Welcome to DevArena")
+
+	printZeroValues()
 
 	gameHero := hero.Hero{
 		Name:           "Ragnar",

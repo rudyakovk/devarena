@@ -74,7 +74,7 @@ Beginner
 - [x] float64
 - [ ] rune
 - [ ] byte
-- [ ] zero values
+- [x] zero values
 - [ ] type conversion
 - [ ] custom types
 - [ ] type aliases
