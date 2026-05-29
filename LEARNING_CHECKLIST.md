@@ -69,7 +69,7 @@ Beginner
 
 - [x] string
 - [x] int
-- [ ] int64
+- [x] int64
 - [x] bool
 - [x] float64
 - [ ] rune
