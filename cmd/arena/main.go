@@ -80,6 +80,20 @@ func printTypeConversions() {
 	fmt.Println("Win rate text:", winRateText)
 }
 
+func calculateBattleReward(heroLevel int, defeatedEnemyName string) (int, string) {
+	baseExperience := 25
+	levelBonus := heroLevel * 5
+	rewardExperience := baseExperience + levelBonus
+
+	rewardItem := "Rusty Sword"
+
+	if defeatedEnemyName == "Goblin" {
+		rewardItem = "Goblin Dagger"
+	}
+
+	return rewardExperience, rewardItem
+}
+
 func main() {
 	fmt.Println("Welcome to DevArena")
 
@@ -199,7 +213,12 @@ func main() {
 
 	gameBattle.Start()
 
-	fmt.Println(gameHero.Name, "received item:", "Rusty Sword")
+	rewardExperience, rewardItem := calculateBattleReward(gameHero.Level, gameEnemy.Name)
+
+	gameHero.AddItem(rewardItem)
+
+	fmt.Println(gameHero.Name, "received experience:", rewardExperience)
+	fmt.Println(gameHero.Name, "received item:", rewardItem)
 	fmt.Println("Final hero HP:", gameHero.HP)
 	fmt.Println("Final enemy HP:", gameEnemy.HP)
 }

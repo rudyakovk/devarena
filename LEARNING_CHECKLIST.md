@@ -84,7 +84,7 @@ Beginner
 - [x] Basic functions
 - [x] Function parameters
 - [x] Return values
-- [ ] Multiple return values
+- [x] Multiple return values
 - [ ] Named return values
 - [ ] Variadic functions
 - [ ] Anonymous functions
